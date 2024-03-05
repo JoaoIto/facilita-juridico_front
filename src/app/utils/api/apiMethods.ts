@@ -63,4 +63,28 @@ export class ApiUtils {
             throw error;
         }
     }
+
+    static async post<T>(endpoint: string, data: object, token: string): Promise<T | undefined> {
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`,
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Dados enviados com sucesso:', result);
+                return result;
+            } else {
+                console.log('Erro ao enviar os dados:', response.status);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+        return undefined;
+    }
 }

@@ -5,8 +5,10 @@ import { ApiUtils } from "@/app/utils/api/apiMethods";
 import { tokenService } from "@/app/utils/cookies/tokenStorage";
 import Button from "@mui/material/Button";
 import * as React from "react";
+import {useRouter} from "next/navigation";
 
 export default function Home() {
+    const router = useRouter();
     const [clientes, setClientes] = useState<ICliente[]>([]); // Define o estado para armazenar os clientes
     const [filtroNome, setFiltroNome] = useState('');
     const [filtroEmail, setFiltroEmail] = useState('');
@@ -54,6 +56,10 @@ export default function Home() {
         window.location.reload();
     };
 
+    function routerCadastrar(){
+        router.push('/cadastrar');
+    }
+
     return (
         <div className={`h-screen w-screen flex flex-col items-center justify-center`}>
             <h1 className={`text-center my-2 text-3xl font-medium text-start`}>Gerência de usuários</h1>
@@ -95,6 +101,9 @@ export default function Home() {
                     </div>
                 </div>
                 <div className={`flex justify-end`}>
+                    <Button className="self-start bg-blue-600 m-2" type="submit" variant="contained" color="primary" onClick={routerCadastrar}>
+                        Cadastrar
+                    </Button>
                     <Button className="self-end bg-blue-900 m-2" type="submit" variant="contained" color="primary" onClick={handleLimparFiltros}>
                         Limpar filtros
                     </Button>
