@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { ApiUtils } from "@/app/utils/api/apiMethods";
 import { tokenService } from "@/app/utils/cookies/tokenStorage";
 import Button from "@mui/material/Button";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function CadastroCliente() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
+    const [coordenadaX, setCoordenadaX] = useState('');
+    const [coordenadaY, setCoordenadaY] = useState('');
     const [mensagem, setMensagem] = useState('');
     const router = useRouter();
 
@@ -21,7 +23,9 @@ export default function CadastroCliente() {
             const novoCliente = {
                 nome,
                 email,
-                telefone
+                telefone,
+                coordenada_x: coordenadaX,
+                coordenada_y: coordenadaY
             };
 
             console.log('Cadastrando cliente:', novoCliente);
@@ -40,6 +44,8 @@ export default function CadastroCliente() {
             setNome('');
             setEmail('');
             setTelefone('');
+            setCoordenadaX('');
+            setCoordenadaY('');
 
         } catch (error) {
             console.error('Erro ao cadastrar cliente:', error);
@@ -82,6 +88,28 @@ export default function CadastroCliente() {
                         type="text"
                         value={telefone}
                         onChange={(e) => setTelefone(e.target.value)}
+                    />
+                </div>
+                <div className={`flex flex-col`}>
+                    <label htmlFor="coordenada_x">Coordenada X: </label>
+                    <input
+                        id={"coordenada_x"}
+                        className={`p-2 rounded border-4 border-solid border-slate-800`}
+                        placeholder={`Coordenada X`}
+                        type="text"
+                        value={coordenadaX}
+                        onChange={(e) => setCoordenadaX(e.target.value)}
+                    />
+                </div>
+                <div className={`flex flex-col`}>
+                    <label htmlFor="coordenada_y">Coordenada Y: </label>
+                    <input
+                        id={"coordenada_y"}
+                        className={`p-2 rounded border-4 border-solid border-slate-800`}
+                        placeholder={`Coordenada Y`}
+                        type="text"
+                        value={coordenadaY}
+                        onChange={(e) => setCoordenadaY(e.target.value)}
                     />
                 </div>
                 <Button className="self-center bg-blue-900 m-2" type="submit" variant="contained" color="primary" onClick={handleCadastroCliente}>
