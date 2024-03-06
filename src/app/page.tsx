@@ -1,12 +1,14 @@
 "use client"
 
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {ApiUtils} from "@/app/utils/api/apiMethods";
 import {tokenService} from "@/app/utils/cookies/tokenStorage";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import {useRouter} from "next/navigation";
-
+import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
+import Map from "@/app/components/Map/Map";
 export default function Home() {
     const router = useRouter();
     const [clientes, setClientes] = useState<ICliente[]>([]); // Define o estado para armazenar os clientes
@@ -15,6 +17,11 @@ export default function Home() {
     const [filtroTelefone, setFiltroTelefone] = useState('');
     const [filtroCoordenadaX, setFiltroCoordenadaX] = useState('');
     const [filtroCoordenadaY, setFiltroCoordenadaY] = useState('');
+    const [rota, setRota] = useState<ICoordenadas[]>([]);
+
+    const [center, setCenter] = useState({ lat: 13.084622, lng: 80.248357 });
+    const ZOOM_LEVEL = 9;
+    const mapRef = useRef();
 
     const fetchClientes = async (endpoint: string) => {
         try {
@@ -54,6 +61,24 @@ export default function Home() {
         }
     };
 
+    const fetchRota = async () => {
+        try {
+            const token = tokenService.get();
+            const fetchedData = await ApiUtils.get<{ message: string, rota: number[] }>('http://localhost:8080/rota', token);
+
+            if (fetchedData && fetchedData.rota) {
+                // Extrair coordenadas dos clientes
+                const rotaComCoordenadas: ICoordenadas[] = fetchedData.rota.map((indice) => {
+                    const cliente = clientes[indice];
+                    return { x: cliente.coordenada_x, y: cliente.coordenada_y };
+                });
+                setRota(rotaComCoordenadas);
+            }
+        } catch (error) {
+            console.error('Erro ao calcular rota:', error);
+        }
+    };
+
     const handleLimparFiltros = () => {
         setFiltroNome('');
         setFiltroEmail('');
@@ -68,7 +93,7 @@ export default function Home() {
     }
 
     return (
-        <div className={`h-screen w-screen flex flex-col items-center justify-center`}>
+        <div className={`h-full w-full flex flex-col items-center justify-center p-2`}>
             <h1 className={`text-center my-2 text-3xl font-medium text-start`}>Gerência de usuários</h1>
             <h2 className={`text-2xl text-white`}>Clientes</h2>
             <div className={`flex flex-col`}>
@@ -133,10 +158,19 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className={`flex justify-end`}>
+                <div className={`flex justify-evenly my-2`}>
                     <Button className="self-start bg-blue-600 m-2" type="submit" variant="contained" color="primary"
                             onClick={routerCadastrar}>
                         Cadastrar
+                    </Button>
+                    <Button
+                        className="self-end bg-blue-900 m-2"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={fetchRota}
+                    >
+                        Calcular Rota
                     </Button>
                     <Button className="self-end bg-blue-900 m-2" type="submit" variant="contained" color="primary"
                             onClick={handleLimparFiltros}>
@@ -172,7 +206,10 @@ export default function Home() {
                 ))}
                 </tbody>
             </table>
-
+            <h2 className={`text-center my-2 text-3xl font-medium text-start`}>Rota de clientes</h2>
+            <div className={`h-80 w-full border-2 border-slate-700 my-4`}>
+                <Map clientes={clientes}/>
+            </div>
         </div>
     );
 }
