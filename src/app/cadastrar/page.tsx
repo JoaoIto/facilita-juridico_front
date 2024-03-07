@@ -34,22 +34,27 @@ export default function CadastroCliente() {
 
             console.log('Resposta do cadastro:', response);
 
-            setMensagem('Cliente cadastrado com sucesso!');
-            // Redirecionar para a página inicial após 2 segundos
-            setTimeout(() => {
-                router.push('/');
-            }, 2000);
+            // Verifica o status da resposta
+            if (response.status === 201) {
+                setMensagem('Cliente cadastrado com sucesso!');
+                // Redirecionar para a página inicial após 2 segundos
+                setTimeout(() => {
+                    router.push('/');
+                }, 2000);
 
-            // Limpar os campos após o cadastro
-            setNome('');
-            setEmail('');
-            setTelefone('');
-            setCoordenadaX('');
-            setCoordenadaY('');
+                // Limpar os campos após o cadastro
+                setNome('');
+                setEmail('');
+                setTelefone('');
+                setCoordenadaX('');
+                setCoordenadaY('');
+            } else {
+                setMensagem('Erro ao cadastrar cliente. Por favor, tente novamente. Telefone ou email já estão cadastrados!');
+            }
 
         } catch (error) {
             console.error('Erro ao cadastrar cliente:', error);
-            setMensagem('Erro ao cadastrar cliente. Por favor, tente novamente.');
+            setMensagem('Erro ao cadastrar cliente. Por favor, tente novamente. Telefone ou email já estão cadastrados!');
         }
     };
 
