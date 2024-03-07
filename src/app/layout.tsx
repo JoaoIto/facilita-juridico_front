@@ -20,7 +20,12 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body className={inter.className}>
-      {children}
+      {isPublicPage && children}
+      {!isPublicPage && (
+          <PrivateRoute>
+              {children}
+          </PrivateRoute>
+      )}
       </body>
       </html>
   );

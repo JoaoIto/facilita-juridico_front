@@ -111,6 +111,7 @@ export default function LoginPage() {
                         <TextField
                             className="font-bold bg-white"
                             margin="normal"
+                            type="password"
                             required
                             fullWidth
                             label={<label className="font-bold">Senha</label>}
