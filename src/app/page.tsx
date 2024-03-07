@@ -209,12 +209,18 @@ export default function Home() {
                 <div className="p-4">
                     <h2 className="text-xl font-bold mb-2">Ordem da rota:</h2>
                     <ul>
-                        {ordemRota.map((rota, index) => (
-                            <li key={index} className="mb-1">{rota}</li>
-                        ))}
+                        <ul>
+                            {ordemRota.map((rota, index) => (
+                                <li key={index} className="mb-1">
+                                    {rota === 0 ? "Empresa -> " : `Cliente: ${rota}`}
+                                </li>
+                            ))}
+                        </ul>
+
                     </ul>
                 </div>
             </Modal>
         </div>
     );
+
 }
