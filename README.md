@@ -1,5 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sistema Facilita Jurídico
 
+Esta documentação destina-se a fornecer uma visão geral do front-end do projeto "Facilita Jurídico", incluindo tecnologias utilizadas, estrutura de pastas, fluxo de trabalho de desenvolvimento e instruções para execução do projeto localmente.
+
+
+## Visão geral:
+
+<video width="640" height="360" controls>
+  <source src="./public/videoSistema.mp4" type="video/mp4">
+  Seu navegador não suporta o elemento de vídeo.
+</video>
+
+## Tecnologias Utilizadas
+
+- React.js: v17.0.2
+- Next.js: v12.1.0
+-     Material-UI: v5.3.0
+- React Leaflet: v3.2.0
+- Leaflet: v1.9.4
+- @emotion/react: v11.11.4
+- @emotion/styled: v11.11.0
+- @hookform/resolvers: v3.3.4
+- @mui/icons-material: v5.15.12
+- @mui/material: v5.15.12
+- nookies: v2.5.2
+           
+---
 ## Getting Started
 
 First, run the development server:
@@ -16,21 +41,4 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
