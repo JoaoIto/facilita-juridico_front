@@ -6,7 +6,7 @@ Esta documentação destina-se a fornecer uma visão geral do front-end do proje
 ## Visão geral:
 
 <video width="640" height="360" controls>
-  <source src="./public/videoSistema.mp4" type="video/mp4">
+  <source src="https://github.com/JoaoIto/facilita-juridico_front/public/videoSistema.mp4" type="video/mp4">
   Seu navegador não suporta o elemento de vídeo.
 </video>
 
