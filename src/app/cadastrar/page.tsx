@@ -53,8 +53,15 @@ export default function CadastroCliente() {
         }
     };
 
+    function routerInicial(){
+        setTimeout(() => {
+            router.push('/');
+        }, 2000);
+    }
+
     return (
         <div className={`h-screen w-screen flex flex-col items-center justify-center`}>
+            <Button className="right-20 bg-blue-900 m-2" variant="contained" color="primary" onClick={routerInicial}>Voltar</Button>
             <h1 className={`text-center my-2 text-3xl font-medium text-start`}>Cadastro de Cliente</h1>
             <div className={`flex flex-col w-full p-2 items-center justify-center gap-2`}>
                 <div className={`flex flex-col`}>
